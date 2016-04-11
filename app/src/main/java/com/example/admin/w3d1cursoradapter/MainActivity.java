@@ -14,6 +14,8 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivityTAG_";
     private static final String EXAMPLE_NAME = "Edwin";
     private static final int EXAMPLE_AGE = 64;
+    private static final String EXAMPLE_IMG = "http://i.imgur.com/DvpvklR.png";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
                 ContentValues values = new ContentValues();
                 values.put(UsersDatabaseHelper.KEY_USER_NAME, EXAMPLE_NAME + " " + i);
                 values.put(UsersDatabaseHelper.KEY_AGE, EXAMPLE_AGE + i);
+                values.put(UsersDatabaseHelper.KEY_URL_IMG, EXAMPLE_IMG + i);
 
                 db.insertOrThrow(UsersDatabaseHelper.TABLE_USERS, null, values);
             }
@@ -55,9 +58,11 @@ public class MainActivity extends AppCompatActivity {
                 do {
                     String nameUser = cursor.getString(cursor.getColumnIndex(UsersDatabaseHelper.KEY_USER_NAME));
                     String ageUser = cursor.getString(cursor.getColumnIndex(UsersDatabaseHelper.KEY_USER_ID));
+                    String imgUser = cursor.getString(cursor.getColumnIndex(UsersDatabaseHelper.KEY_URL_IMG));
 
                     Log.d(TAG, "logInformation: " + nameUser);
                     Log.d(TAG, "logInformation: " + ageUser);
+                    Log.d(TAG, "logInformation: " + imgUser);
 
                 } while (cursor.moveToNext());
             }
