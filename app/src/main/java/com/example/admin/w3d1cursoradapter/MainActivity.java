@@ -87,4 +87,27 @@ public class MainActivity extends AppCompatActivity {
         CustomAdapter todoAdapter = new CustomAdapter(this, cursor, 0);
         lvItems.setAdapter(todoAdapter);
     }
+
+    public void clearListView(View view){
+            UsersDatabaseHelper usersDatabaseHelper = new UsersDatabaseHelper(getApplicationContext());
+            SQLiteDatabase db = usersDatabaseHelper.getWritableDatabase();
+            db.delete(UsersDatabaseHelper.TABLE_USERS,"1 = 1",new String[]{});
+            fillListView(view);
+    }
+
+    public void clearLast(View view){
+        UsersDatabaseHelper usersDatabaseHelper = new UsersDatabaseHelper(getApplicationContext());
+
+        final String POSTS_SELECT_QUERY = "SELECT * FROM users";
+
+        SQLiteDatabase db = usersDatabaseHelper.getWritableDatabase();
+        Cursor cursor = db.rawQuery(POSTS_SELECT_QUERY, null);
+
+        if (cursor.moveToLast()) {
+            String nameUser = cursor.getString(cursor.getColumnIndex(UsersDatabaseHelper.KEY_USER_NAME));
+            String ageUser = cursor.getString(cursor.getColumnIndex(UsersDatabaseHelper.KEY_USER_ID));
+            db.delete(UsersDatabaseHelper.TABLE_USERS, UsersDatabaseHelper.KEY_USER_ID + "=? and " + UsersDatabaseHelper.KEY_USER_NAME+ "=?",new String[]{ageUser,nameUser});
+            fillListView(view);
+        }
+    }
 }

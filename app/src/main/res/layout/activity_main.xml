@@ -33,6 +33,19 @@
             android:text="Fill ListView"
             android:onClick="fillListView"
             android:layout_weight="1"/>
+        <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Clear ListView"
+        android:onClick="clearListView"
+        android:layout_weight="1"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Clear Last Row"
+            android:onClick="clearLast"
+            android:layout_weight="1"/>
+
     </LinearLayout>
 
     <ListView
